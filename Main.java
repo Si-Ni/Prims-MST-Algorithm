@@ -2,25 +2,30 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        // Erzeugen einer Liste von Strings, einer Liste von Knoten
+        // und einer Liste von Kanten aus den Daten der txt-Datei
         ArrayList<String> fileData = readFile("MST_Prim1.txt");
         ArrayList<Node> nodes = Node.createNodes(fileData);
+        // Erzeugen von 2 'leeren' MST aus der Liste von Knoten
         MST mst = new MST(new ArrayList<Node>(nodes));
+        MST eagerMST = new MST(new ArrayList<Node>(nodes));
         ArrayList<Edge> edges = Edge.createAndAddEdges(fileData, nodes);
+        // Erzeugen eines Graphens aus der Liste von Knoten und Kanten
         Graph graph = new Graph(nodes, edges);
 
+        // Erzeugen des MST aus dem Graphen mithilfe des 'lazy' Algorithmus von Prim und Ausgabe dessen auf der Konsole
         mst.primsAlgorithm(graph);
         System.out.println(mst.toString());
 
-
-        MST eagerMST = new MST(new ArrayList<Node>(nodes));
+        // Erzeugen des MST aus dem Graphen mithilfe des 'eager' Algorithmus von Prim und Ausgabe dessen auf der Konsole
         eagerMST.eagerPrimsAlgorithm(graph);
         System.out.println(eagerMST.toString());
     }
 
+    // Methode zum Auslesen der Textdatei und Übertragen der Daten in das Format einer Liste von Strings
     private static ArrayList<String> readFile(String filename) {
         ArrayList<String> fileData = new ArrayList<>();
         try {
