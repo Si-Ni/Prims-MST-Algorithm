@@ -18,10 +18,16 @@ public class Main {
 
         // Erzeugen des MST aus dem Graphen mithilfe des 'lazy' Algorithmus von Prim und Ausgabe dessen auf der Konsole
         mst.primsAlgorithm(graph);
+        System.out.println("MST found by the lazy prim's algorithm: ");
         System.out.println(mst.toString());
+
+        for (Edge edge: edges) {
+            edge.setUsed(false);
+        }
 
         // Erzeugen des MST aus dem Graphen mithilfe des 'eager' Algorithmus von Prim und Ausgabe dessen auf der Konsole
         eagerMST.eagerPrimsAlgorithm(graph);
+        System.out.println("MST found by the eager prim's algorithm: ");
         System.out.println(eagerMST.toString());
     }
 
@@ -36,6 +42,7 @@ public class Main {
                 fileData.add(contentLine);
                 contentLine = br.readLine();
             }
+            br.close();
             return fileData;
         } catch (Exception ex) {
             System.out.println(ex);

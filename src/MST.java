@@ -117,8 +117,8 @@ public class MST {
             // Zielknoten der Kante wird als destNode gespeichert
             Node destNode = edge.getDestNode();
 
-            // Wenn dieser Knoten bereits betrachtet wurde, wird Iteration für diese eine Kante übersprungen
-            if (visitedNodes.contains(destNode)) continue;
+            // Wenn dieser Knoten oder die Kante bereits betrachtet wurde, wird Iteration für diese eine Kante übersprungen
+            if (visitedNodes.contains(destNode) || edge.isUsed()) continue;
 
             // Wenn die IPQ den Knoten nicht enthält, wird er mit der aktuellen Kante zur IPQ hinzugefügt
             if (!priorityQueue.contains(destNode)) {
