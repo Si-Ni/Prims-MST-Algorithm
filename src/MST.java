@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class MST {
     // Implementierung der Datenstruktur: 'Minimum Spanning Tree' (MST)
@@ -24,8 +25,8 @@ public class MST {
         ArrayList<Node> allNodes = graph.getNodes();
         // Erzeugung einer leeren Liste für die bereits besuchten Knoten
         ArrayList<Node> visitedNodes = new ArrayList<>();
-        // Erzeugung einer leeren priority queue (Liste) von Kanten
-        ArrayList<Edge> priorityQueue = new ArrayList<>();
+        // Erzeugung einer leeren priority queue von Kanten
+        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>();
 
         // Der erste Knoten des Graphens wird betrachtet/besucht und zu den besuchten Knoten hinzugefügt
         Node visitingNode = allNodes.get(0);
@@ -38,7 +39,7 @@ public class MST {
         while (!priorityQueue.isEmpty() && visitedNodes.size() != allNodes.size()) {
             // Über den Methodenaufruf 'getNextBestEdgeFromList' wird die aktuell minimal gewichtete Kante aus
             // der priority queue entnommen
-            Edge minimalEdge = Edge.getNextBestEdgeFromList(priorityQueue);
+            Edge minimalEdge = priorityQueue.poll();
             // Der Knoten, auf welchen die Kante zeigt, wird zum neuen betrachteten/besuchten Knoten
             visitingNode = minimalEdge.getDestNode();
 
@@ -61,7 +62,7 @@ public class MST {
     }
 
     // Methode zum Hinzufügen aller Kanten des aktuell betrachteten Knotens zu der priority queue
-    private void addEdges(ArrayList<Edge> priorityQueue, Node visitingNode) {
+    private void addEdges(PriorityQueue<Edge> priorityQueue, Node visitingNode) {
         for (Edge edge : visitingNode.getEdges()) {
             // Wenn die Kante noch nicht genutzt wird, wird sie zur PQ hinzugefügt
             if (!edge.isUsed()) priorityQueue.add(edge);

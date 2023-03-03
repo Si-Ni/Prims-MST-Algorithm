@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Edge {
+public class Edge implements Comparable<Edge> {
     // Implementierung der Datenstruktur "Kante"
     // bestehend aus einem Ausgangs- und einem Zielknoten
     // sowie einer Gewichtung und einer Information darüber,
@@ -37,28 +37,14 @@ public class Edge {
         this.used = used;
     }
 
-    // Methode welche die Funktionalität der 'priority queue' implementiert
-    public static Edge getNextBestEdgeFromList(ArrayList<Edge> priorityQueue) {
-        // Beliebiges Element (in diesem Fall das Erste) aus der Liste wird entnommen
-        Edge minimalEdge = priorityQueue.get(0);
-        int smallestIndex = 0;
-
-        // Iteration über alle Elemente aus der Liste von bisher gefundenen Kanten:
-        for (int i = 1; i < priorityQueue.size(); i++) {
-            // Wenn die aktuelle Kante leichter ist als die bisher minimal gewichtete Kante,
-            // soll die bisher leichteste Kante durch die Neue/Leichtere ersetzt werden
-            // und ihr Index gespeichert werden.
-            if (priorityQueue.get(i).getWeight() < minimalEdge.getWeight()) {
-                minimalEdge = priorityQueue.get(i);
-                smallestIndex = i;
-            }
-        }
-        // Die leichteste gefundene Kante wird als genutzt markiert, aus der priority queue entfernt
-        // und als ergebnis des Methodenaufrufs zurückgegeben
-        minimalEdge.setUsed(true);
-        priorityQueue.remove(smallestIndex);
-
-        return minimalEdge;
+    // Methode welche es der priority queue ermöglicht Objekte vom Typ 'Edge' zu vergleichen
+    @Override
+    public int compareTo(Edge e) {
+        if (weight < e.getWeight())
+            return -1;
+        else if (weight > e.getWeight())
+            return 1;
+        return 0;
     }
 
     // Methode zur Erzeugung einer Liste von Kanten aus einer aus der gegebenen Datei
