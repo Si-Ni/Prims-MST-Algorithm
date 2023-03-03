@@ -38,6 +38,7 @@ public class Main {
         sc.close();
     }
 
+    // Methode zum Abfragen des Pfades der Textdatei über einen JFileChooser
     private static String getAbsoluteFilePath() {
         System.out.println("Choose a txt file with the format:");
         System.out.println("Node1  Node2  Weight \n... \n...");
