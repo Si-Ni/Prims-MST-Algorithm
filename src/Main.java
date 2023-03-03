@@ -1,13 +1,15 @@
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         // Erzeugen einer Liste von Strings, einer Liste von Knoten
         // und einer Liste von Kanten aus den Daten der txt-Datei
-        ArrayList<String> fileData = readFile("MST_Prim1.txt");
+        ArrayList<String> fileData = readFile(getAbsoluteFilePath());
         ArrayList<Node> nodes = Node.createNodes(fileData);
         // Erzeugen von 2 'leeren' MST aus der Liste von Knoten
         MST mst = new MST(new ArrayList<Node>(nodes));
@@ -29,6 +31,31 @@ public class Main {
         eagerMST.eagerPrimsAlgorithm(graph);
         System.out.println("MST found by the eager prim's algorithm: ");
         System.out.println(eagerMST.toString());
+
+        System.out.println("Press 'Enter' key to exit.");
+        Scanner sc = new Scanner(System.in);
+        sc.nextLine();
+        sc.close();
+    }
+
+    private static String getAbsoluteFilePath() {
+        System.out.println("Choose a txt file with the format:");
+        System.out.println("Node1  Node2  Weight \n... \n...");
+        System.out.println("Which describes a connected, edge-weighted, undirected graph");
+        System.out.println("Note: There must be 2 spaces between each node and the weight");
+        System.out.println("\nPress 'Enter' key to choose a file.");
+
+        Scanner sc = new Scanner(System.in);
+        sc.nextLine();
+
+        JFileChooser fileChooser = new JFileChooser();
+
+        int response = fileChooser.showOpenDialog(null);
+
+        if (response == JFileChooser.APPROVE_OPTION) {
+            return fileChooser.getSelectedFile().getAbsolutePath();
+        }
+        return "MST_Prim1.txt";
     }
 
     // Methode zum Auslesen der Textdatei und Übertragen der Daten in das Format einer Liste von Strings
