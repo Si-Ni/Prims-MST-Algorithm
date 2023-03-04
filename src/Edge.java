@@ -61,18 +61,17 @@ public class Edge implements Comparable<Edge> {
             Integer weight = Integer.parseInt(s[2]);
             // Das Kantenobjekt wird aus den vorher gesammelten Daten erstellt
             Edge edge = new Edge(firstNode, secondNode, weight);
-            // Die Kante wird zu jedem der beiden Knoten sowie der Liste 'edges' hinzugefügt
+            // Die Kante wird zu dem ersten der beiden Knoten sowie der Liste 'edges' hinzugefügt
             firstNode.addEdge(edge);
-            secondNode.addEdge(edge);
             edges.add(edge);
             // Gleichzeitig wird der ungerichtete Graph in einen gerichteten Graphen konvertiert, bei dem jede Kante
             // sowohl von dem Knoten hin, als auch von ihm weg zeigt.
-            // Dazu wird die 'gleiche' Kante nochmal andersherum erzeugt und jedem Knoten zugewiesen und in der
-            // Liste 'edges' gespeichert
+            // Dazu wird die gleiche Kante nochmal 'andersherum' erzeugt
+            // und in der Liste 'edges' gespeichert
             Edge edgeBackwards = new Edge(secondNode, firstNode, weight);
-            firstNode.addEdge(edgeBackwards);
             secondNode.addEdge(edgeBackwards);
             edges.add(edgeBackwards);
+            // Jeder der beiden Knoten speichert die von ihm ausgehenden Kanten
         }
         return edges;
     }
