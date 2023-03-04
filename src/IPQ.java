@@ -4,12 +4,12 @@ public class IPQ {
 
     // Implementierung der Datenstruktur: 'indexed priority queue'
     // Diese IPQ ist wie aus einer Liste von Tupeln aufgebaut.
-    public class NodeWithEdgePointingAtIt {
+    public class NodeWithBestEdge {
         // Das erste Element ist ein Knoten und bildet hierbei den 'Index' der IPQ.
         // Das 2. Element ist die bisher minimal gewichtete Kante, welche auf diesen Knoten zeigt.
         private Node node;
         private Edge edge;
-        public NodeWithEdgePointingAtIt(Node node, Edge edge) {
+        public NodeWithBestEdge(Node node, Edge edge) {
             this.node = node;
             this.edge = edge;
         }
@@ -27,7 +27,7 @@ public class IPQ {
         }
     }
 
-    private ArrayList<NodeWithEdgePointingAtIt> nodes;
+    private ArrayList<NodeWithBestEdge> nodes;
 
     public IPQ() {
         this.nodes = new ArrayList<>();
@@ -35,7 +35,7 @@ public class IPQ {
 
     // Methode zum Hinzufügen eines neuen Datensatzes(Knoten, Kante) zu der IPQ
     public void insert(Node node, Edge edge) {
-        nodes.add(new NodeWithEdgePointingAtIt(node, edge));
+        nodes.add(new NodeWithBestEdge(node, edge));
     }
 
     // Methode zum Überprüfen, ob ein Knoten bereits in der IPQ vorhanden ist
@@ -46,7 +46,7 @@ public class IPQ {
     // Methode, welche überprüft, ob die übergebene Kante leichter ist, als die bisher gespeicherte
     public void decreaseKey(Node updatedNode, Edge edge) {
         // Suche den übergebenen Knoten aus der IPQ
-        NodeWithEdgePointingAtIt node = nodes.stream().filter(o -> o.getNode().equals(updatedNode)).findFirst().orElse(null);
+        NodeWithBestEdge node = nodes.stream().filter(o -> o.getNode().equals(updatedNode)).findFirst().orElse(null);
         // Wenn die übergebene Kante leichter ist, als die Bisherige,
         // so setze die leichtere Kante als neue Kante für den Knoten
         if (edge.getWeight() < node.getEdge().getWeight()) {
