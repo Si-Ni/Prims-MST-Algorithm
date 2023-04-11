@@ -1,3 +1,5 @@
+Commenting on the source code was a requirement in the assignment. Otherwise I would have commented this code much less.
+
 - verwendete IDE: IntelliJ IDEA
 - verwendete Programmiersprache: Java (JDK 17)
 - ausführbares Programm befindet sich im Ordner: build
